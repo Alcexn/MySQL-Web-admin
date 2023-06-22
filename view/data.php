@@ -17,7 +17,7 @@ $result = $conn->query($sql);
 $rows = array();
 
 if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         $rows[] = $row;
     }
 }
@@ -42,12 +42,14 @@ $conn->close();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>编辑表格</title>
     <!-- 引入 Bootstrap 样式 -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
+
 <body>
     <div class="container">
         <h1 class="text-center">编辑表格</h1>
@@ -61,24 +63,32 @@ $conn->close();
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($rows as $row) { ?>
+                <?php foreach ($rows as $row) ?>
                 <tr>
-                    <td><?php echo $row["id"]; ?></td>
-                    <td><?php echo $row["name"]; ?></td>
-                    <td><?php echo $row["email"]; ?></td>
+                    <td>
+                        <?php echo $row["id"]; ?>
+                    </td>
+                    <td>
+                        <?php echo $row["name"]; ?>
+                    </td>
+                    <td>
+                        <?php echo $row["email"]; ?>
+                    </td>
                     <td>
                         <!-- 弹出模态框以编辑数据 -->
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal<?php echo $row["id"]; ?>">编辑</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                            data-target="#editModal<?php echo $row["id"]; ?>">编辑</button>
                         <!-- 删除数据 -->
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="display: inline-block;">
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"
+                            style="display: inline-block;">
                             <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
                             <button type="submit" class="btn btn-danger btn-sm">删除</button>
                         </form>
                     </td>
                 </tr>
                 <!-- 模态框用于编辑数据 -->
-                <div class="modal fade" id="editModal<?php echo $row["id"]; ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel<?php echo $row["id"]; ?>" aria-hidden="true">
+                <div class="modal fade" id="editModal<?php echo $row["id"]; ?>" tabindex="-1" role="dialog"
+                    aria-labelledby="editModalLabel<?php echo $row["id"]; ?>" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                               
